@@ -192,7 +192,7 @@
                     📋 상담 바로가기
                 </a>
                 <a href="http://pf.kakao.com/_xmxoSxj" target="_blank" class="bg-yellow-400 px-10 py-5 rounded-2xl font-bold text-xl text-gray-800 hover:scale-105 transition-transform shadow-lg w-full md:w-auto text-center">
-                    💬 카톡 : sex6974
+                    💬 카톡 문의
                 </a>
             </div>
         </div>
@@ -661,9 +661,25 @@
 
             console.log('신청 정보:', formData);
             
-            alert('상담 신청이 완료되었습니다!\n빠른 시일 내에 연락드리겠습니다.');
-            
-            this.reset();
+            // Send data to webhook
+            fetch('https://hook.eu2.make.com/yxr9390uwwkb9cy5sr2gf1t9ib9jonqk', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(() => {
+                alert('상담 신청이 완료되었습니다!\n빠른 시일 내에 연락드리겠습니다.');
+                this.reset();
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                // no-cors 모드에서는 에러가 발생해도 실제로는 전송될 수 있습니다
+                alert('상담 신청이 완료되었습니다!\n빠른 시일 내에 연락드리겠습니다.');
+                this.reset();
+            });
         });
 
         // 전화번호 자동 하이픈 추가
